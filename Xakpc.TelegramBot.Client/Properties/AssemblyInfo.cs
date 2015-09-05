@@ -21,12 +21,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Xakpc.TelegramBot.Client")]
-[assembly: AssemblyDescription("Client for HTTP-based interface created for developers keen on building bots for Telegram")]
+[assembly: AssemblyTitle("Telegram Bot Client")]
+[assembly: AssemblyDescription("C# client for HTTP-based interface created for developers keen on building bots for Telegram")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Pavel Osadchuk")]
 [assembly: AssemblyProduct("Xakpc.TelegramBot.Client")]
-[assembly: AssemblyCopyright("Copyright © Pavel Osadchuk 2015")]
+[assembly: AssemblyCopyright("Copyright(C) 2015 by Pavel Osadchuk")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
