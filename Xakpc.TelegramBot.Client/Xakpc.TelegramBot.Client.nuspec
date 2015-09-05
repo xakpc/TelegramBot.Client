@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.en.html</licenseUrl>
+    <projectUrl>https://github.com/xakpc/TelegramBot.Client</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Changes related to August 29, 2015 update</releaseNotes>
+    <copyright>Copyright(C) 2015 by Pavel Osadchuk</copyright>
+    <tags>Telegram Bot Api Client</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" />
+      <dependency id="RestSharp" />
+    </dependencies>
+  </metadata>
+
+</package>
