@@ -92,14 +92,25 @@ namespace Xakpc.TelegramBot.Client
             return apiResponse.Result;
         }
 
-        public async Task SetWebhookAsync(Uri url)
+        public Task SetWebhookAsync(Uri url)
         {
             if (url.Scheme != "https")
                 throw new ArgumentException("Url must be HTTPS", nameof(url));
 
             var request = new RestRequest(MakeRequest("setWebhook"), Method.GET);
             request.AddQueryParameter("url", url.AbsoluteUri);
-            var result = await _client.ExecuteGetTaskAsync(request).ConfigureAwait(false);
+            return _client.ExecuteGetTaskAsync(request);
+        }
+
+        public Task SetWebhookAsync(Uri url, InputFile certificate)
+        {
+            if (url.Scheme != "https")
+                throw new ArgumentException("Url must be HTTPS", nameof(url));
+
+            var request = new RestRequest(MakeRequest("setWebhook"), Method.GET);
+            request.AddQueryParameter("url", url.AbsoluteUri);
+            request.AddFile("certificate", certificate.Data, certificate.FileName);
+            return _client.ExecuteGetTaskAsync(request);
         }
 
         public async Task RemoveWebhookAsync()

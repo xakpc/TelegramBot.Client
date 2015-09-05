@@ -51,6 +51,13 @@ namespace Xakpc.TelegramBot.Client
         Task SetWebhookAsync(Uri url);
 
         /// <summary>
+        /// Use this method to specify a url and receive incoming updates via an outgoing webhook
+        /// </summary>
+        /// <param name="url">Optional. HTTPS url to send updates to.</param>
+        /// <param name="certificate">Optional. Upload your public key certificate so that the root certificate in use can be checked</param>
+        Task SetWebhookAsync(Uri url, InputFile certificate);
+
+        /// <summary>
         /// Use this method to send empty string to remove webhook integration
         /// </summary>
         Task RemoveWebhookAsync();
