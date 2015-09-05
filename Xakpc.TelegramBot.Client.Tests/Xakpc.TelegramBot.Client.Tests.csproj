@@ -69,13 +69,18 @@
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\photo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\audio.ogg" />
+    <None Include="Resources\voice.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\audio.mp3" />
+    <Content Include="Resources\video.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,5 +25,11 @@ namespace Xakpc.TelegramBot.Model
     {       
         [DataMember(Name = "duration")]
         public int Duration { get; set; }
+
+        [DataMember(Name = "performer", IsRequired = false, EmitDefaultValue = true)]
+        public string Performer { get; set; }
+
+        [DataMember(Name = "title", IsRequired = false, EmitDefaultValue = true)]
+        public string Title { get; set; }
     }
 }

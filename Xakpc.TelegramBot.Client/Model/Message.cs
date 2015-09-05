@@ -57,6 +57,9 @@ namespace Xakpc.TelegramBot.Model
         [DataMember(Name = "audio", IsRequired = false, EmitDefaultValue = true)]
         public Audio Audio { get; set; }
 
+        [DataMember(Name = "caption", IsRequired = false, EmitDefaultValue = true)]
+        public string Caption { get; set; }
+
         [DataMember(Name = "document", IsRequired = false, EmitDefaultValue = true)]
         public Document Document { get; set; }
 
@@ -68,6 +71,9 @@ namespace Xakpc.TelegramBot.Model
 
         [DataMember(Name = "video", IsRequired = false, EmitDefaultValue = true)]
         public Video Video { get; set; }
+
+        [DataMember(Name = "voice", IsRequired = false, EmitDefaultValue = true)]
+        public Voice Voice { get; set; }
 
         [DataMember(Name = "contact", IsRequired = false, EmitDefaultValue = true)]
         public Contact Contact { get; set; }

@@ -50,11 +50,7 @@ namespace Xakpc.TelegramBot.Client.Tests
         {
             var apiClient = ConstructClient();
 
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-            var lastMessage = incoming.Last();
-
-            var actual = await apiClient.SendChatAction(lastMessage.Message.Chat.Id, "find_location");
+            var actual = await apiClient.SendChatAction(TestChatId, "find_location");
 
             Assert.IsTrue(actual);
         }

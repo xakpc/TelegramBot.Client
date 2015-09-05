@@ -28,15 +28,9 @@ namespace Xakpc.TelegramBot.Client.Tests
         [Test]
         public async Task SendPhotoAsync_Called_SuccesfullySent()
         {
-            ITelegramBotApiClient apiClient = ConstructClient();
+            var apiClient = ConstructClient();
 
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-            var lastMessage = incoming.Last();
-
-            var message =
-                await
-                    apiClient.SendPhotoAsync(lastMessage.Message.Chat.Id, new InputFile(ImageToByte(Resources.photo), "photo.png"), null, null, null);
+            var message = await apiClient.SendPhotoAsync(TestChatId, new InputFile(ImageToByte(Resources.photo), "photo.png"), null, null, null);
 
             Assert.IsNotNull(message.Photo);
         }
@@ -45,22 +39,14 @@ namespace Xakpc.TelegramBot.Client.Tests
         public async Task SendPhotoAsync_CalledWithFileId_SuccesfullyResent()
         {
             // arrange
-            ITelegramBotApiClient apiClient = ConstructClient();
+            var apiClient = ConstructClient();
 
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-            var lastMessage = incoming.Last();
-
-            var message =
-                await
-                    apiClient.SendPhotoAsync(lastMessage.Message.Chat.Id, new InputFile(ImageToByte(Resources.photo), "photo.png"), null, null, null);
+            var message = await apiClient.SendPhotoAsync(TestChatId, new InputFile(ImageToByte(Resources.photo), "photo.png"), "send photo", null, null);
 
             Assert.IsNotNull(message.Photo);
 
-            // act
-            message =
-                await
-                    apiClient.SendPhotoAsync(lastMessage.Message.Chat.Id, message.Photo.Last().FileId, "resend photo", null, null);
+            // act 
+            message = await apiClient.SendPhotoAsync(TestChatId, message.Photo.Last().FileId, "resend photo", null, null);
 
             // assert
             Assert.IsNotNull(message.Photo);
@@ -69,35 +55,45 @@ namespace Xakpc.TelegramBot.Client.Tests
         [Test]
         public async Task SendAudioAsync_Called_SuccesfullySent()
         {
-            ITelegramBotApiClient apiClient = ConstructClient();
+            var apiClient = ConstructClient();
 
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-            var lastMessage = incoming.Last();
-
-            var message =
-                await
-                    apiClient.SendAudioAsync(lastMessage.Message.Chat.Id, new InputFile(Resources.audio, "audio.ogg"), null, null);
+            var message = await apiClient.SendAudioAsync(TestChatId, new InputFile(Resources.audio, "audio.mp3"), 100, "Markus Haist", "Free Software Song", null, null);
 
             Assert.IsNotNull(message.Audio);
+        }
+
+        [Test]
+        public async Task SendVoiceAsync_Called_SuccesfullySent()
+        {
+            var apiClient = ConstructClient();
+
+            var message = await apiClient.SendVoiceAsync(TestChatId, new InputFile(Resources.voice, "voice.ogg"), 100, null, null);
+
+            Assert.IsNotNull(message.Voice);
+        }
+
+        [Test]
+        public async Task SendVideoAsync_Called_SuccesfullySent()
+        {
+            var apiClient = ConstructClient();
+
+            var message = await apiClient.SendVideoAsync(TestChatId, new InputFile(Resources.video, "video.mp4"), 572, "Linus Torvalds says GPL v3 violates everything that GPLv2 stood for", null, null);
+
+            Assert.IsNotNull(message.Video);
         }
 
         [Test]
         public async Task SendAudioAsync_CalledWithFileId_SuccesfullyResent()
         {
             // arrange
-            ITelegramBotApiClient apiClient = ConstructClient();
+            var apiClient = ConstructClient();
 
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-            var lastMessage = incoming.Last();
-
-            var message = await apiClient.SendAudioAsync(lastMessage.Message.Chat.Id, new InputFile(Resources.audio, "audio.ogg"), null, null);
+            var message = await apiClient.SendAudioAsync(TestChatId, new InputFile(Resources.audio, "audio.mp3"), 100, "Markus Haist", "Free Software Song", null, null);
 
             Assert.IsNotNull(message.Audio);
 
             // act
-            message = await apiClient.SendAudioAsync(lastMessage.Message.Chat.Id, message.Audio.FileId, null, null);
+            message = await apiClient.SendAudioAsync(TestChatId, message.Audio.FileId, 100, "Markus Haist", "Free Software Song", null, null);
 
             Assert.IsNotNull(message.Audio);
         }
@@ -105,20 +101,16 @@ namespace Xakpc.TelegramBot.Client.Tests
         [Test]
         public async Task SendLocationAsync_Called_SuccesfullySent()
         {
-            ITelegramBotApiClient apiClient = ConstructClient();
+            var apiClient = ConstructClient();           
 
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-            var lastMessage = incoming.Last();
-
-            var message = await apiClient.SendLocationAsync(lastMessage.Message.Chat.Id, -14.407778f, -71.3f, null, null);
+            var message = await apiClient.SendLocationAsync(TestChatId, -14.407778f, -71.3f, null, null);
 
             Assert.IsNotNull(message.Location);
         }
 
         private static byte[] ImageToByte(Image img)
         {
-            ImageConverter converter = new ImageConverter();
+            var converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
     }

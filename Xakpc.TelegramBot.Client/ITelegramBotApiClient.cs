@@ -100,28 +100,58 @@ namespace Xakpc.TelegramBot.Client
             ReplyMarkup replyMarkup);
 
         /// <summary>
-        /// Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. 
-        /// For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Document).  
+        /// Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .mp3 format. 
         /// </summary>
         /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
         /// <param name="audio">Audio file to send. You can either pass a file_id as String to resend an audio that is already on the Telegram servers, or upload a new audio file using multipart/form-data.</param>
+        /// <param name="duration">Optional. Duration of the audio in seconds</param>
+        /// <param name="performer">Optional. Performer</param>
+        /// <param name="title">Optional. Track name</param>
         /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
         /// <param name="replyMarkup">Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
         /// <returns>On success, the sent Message is returned.</returns>
         /// <remarks>Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.</remarks>
-        Task<Message> SendAudioAsync(int chatId, InputFile audio, int? replyToMessageId, ReplyMarkup replyMarkup);
+        Task<Message> SendAudioAsync(int chatId, InputFile audio, int? duration, string performer, string title, int? replyToMessageId, ReplyMarkup replyMarkup);
+
+        /// <summary>
+        /// Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .mp3 format. 
+        /// </summary>
+        /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
+        /// <param name="audio">Audio file to send. You can either pass a file_id as String to resend an audio that is already on the Telegram servers, or upload a new audio file using multipart/form-data.</param>
+        /// <param name="duration">Optional. Duration of the audio in seconds</param>
+        /// <param name="performer">Optional. Performer</param>
+        /// <param name="title">Optional. Track name</param>
+        /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
+        /// <param name="replyMarkup">Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
+        /// <returns>On success, the sent Message is returned.</returns>
+        /// <remarks>Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.</remarks>
+        Task<Message> SendAudioAsync(int chatId, string audio, int? duration, string performer, string title, int? replyToMessageId, ReplyMarkup replyMarkup);
 
         /// <summary>
         /// Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. 
         /// For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Document).  
         /// </summary>
         /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
-        /// <param name="audio">Audio file to send. You can either pass a file_id as String to resend an audio that is already on the Telegram servers, or upload a new audio file using multipart/form-data.</param>
+        /// <param name="voice">Audio file to send. You can either pass a file_id as String to resend an audio that is already on the Telegram servers, or upload a new audio file using multipart/form-data.</param>
+        /// <param name="duration"></param>
         /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
         /// <param name="replyMarkup">Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
         /// <returns>On success, the sent Message is returned.</returns>
         /// <remarks>Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.</remarks>
-        Task<Message> SendAudioAsync(int chatId, string audio, int? replyToMessageId, ReplyMarkup replyMarkup);
+        Task<Message> SendVoiceAsync(int chatId, InputFile voice, int? duration, int? replyToMessageId, ReplyMarkup replyMarkup);
+
+        /// <summary>
+        /// Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. 
+        /// For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Document).  
+        /// </summary>
+        /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
+        /// <param name="voice">Audio file to send. You can either pass a file_id as String to resend an audio that is already on the Telegram servers, or upload a new audio file using multipart/form-data.</param>
+        /// <param name="duration"></param>
+        /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
+        /// <param name="replyMarkup">Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
+        /// <returns>On success, the sent Message is returned.</returns>
+        /// <remarks>Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.</remarks>
+        Task<Message> SendVoiceAsync(int chatId, string voice, int? duration, int? replyToMessageId, ReplyMarkup replyMarkup);
 
         /// <summary>
         /// Use this method to send general files. 
@@ -170,22 +200,26 @@ namespace Xakpc.TelegramBot.Client
         /// </summary>
         /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
         /// <param name="video">Video to send. You can either pass a file_id as String to resend a video that is already on the Telegram servers, or upload a new video file using multipart/form-data.</param>
+        /// <param name="duration"></param>
+        /// <param name="caption"></param>
         /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
         /// <param name="replyMarkup">Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
         /// <returns>On success, the sent Message is returned.</returns>
         /// <remarks>Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.</remarks>
-        Task<Message> SendVideoAsync(int chatId, InputFile video, int? replyToMessageId, ReplyMarkup replyMarkup);
+        Task<Message> SendVideoAsync(int chatId, InputFile video, int? duration, string caption, int? replyToMessageId, ReplyMarkup replyMarkup);
 
         /// <summary>
         /// Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). 
         /// </summary>
         /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
         /// <param name="video">Video to send. You can either pass a file_id as String to resend a video that is already on the Telegram servers, or upload a new video file using multipart/form-data.</param>
+        /// <param name="duration"></param>
+        /// <param name="caption"></param>
         /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
         /// <param name="replyMarkup">Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
         /// <returns>On success, the sent Message is returned.</returns>
         /// <remarks>Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.</remarks>
-        Task<Message> SendVideoAsync(int chatId, string video, int? replyToMessageId, ReplyMarkup replyMarkup);
+        Task<Message> SendVideoAsync(int chatId, string video, int? duration, string caption, int? replyToMessageId, ReplyMarkup replyMarkup);
 
         /// <summary>
         /// Use this method to send point on the map.

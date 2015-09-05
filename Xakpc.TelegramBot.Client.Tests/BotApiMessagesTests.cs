@@ -29,53 +29,31 @@ namespace Xakpc.TelegramBot.Client.Tests
         [Test]
         public async Task SendMessageAsync_Called_SuccesfullySentMessage()
         {
-            ITelegramBotApiClient apiClient = ConstructClient();
+            var apiClient = ConstructClient();
+            const string messageText = "SendMessageAsync_Called_SuccesfullySentMessage";
 
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some incoming mesage to determine chat
+            var message = await apiClient.SendMessageAsync(TestChatId, messageText, null, null, null);
 
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-
-            var lastMessage = incoming.Last();
-
-            var message =
-                await
-                    apiClient.SendMessageAsync(lastMessage.Message.Chat.Id, lastMessage.Message.Text, null, null, null);
-
-            Assert.That(message.Text, Is.EqualTo(lastMessage.Message.Text));
+            Assert.That(message.Text, Is.EqualTo(messageText));
         }
 
         [Test]
         public async Task SendMessageAsync_WithKeyboardHide_SuccesfullyHideKeyboard()
         {
-            ITelegramBotApiClient apiClient = ConstructClient();
-
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-
-            var lastMessage = incoming.Last();
-
+            var apiClient = ConstructClient();
+            const string messageText = "SendMessageAsync_WithKeyboardHide_SuccesfullyHideKeyboard";
             var tempKeyboard = new ReplyKeyboardHide() { HideKeyboard = true };
 
-            var message =
-                await
-                    apiClient.SendMessageAsync(lastMessage.Message.Chat.Id, lastMessage.Message.Text, null, null,
-                        tempKeyboard);
+            var message = await apiClient.SendMessageAsync(TestChatId, messageText, null, null, tempKeyboard);
 
-            Assert.That(message.Text, Is.EqualTo(lastMessage.Message.Text));
+            Assert.That(message.Text, Is.EqualTo(messageText));
         }
 
         [Test]
         public async Task SendMessageAsync_WithKeyboardMarkup_SuccesfullySentMessage()
         {
-            ITelegramBotApiClient apiClient = ConstructClient();
-
-            var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-
-            Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-
-            var lastMessage = incoming.Last();
-
+            var apiClient = ConstructClient();
+            const string messageText = "SendMessageAsync_WithKeyboardMarkup_SuccesfullySentMessage";
             var tempKeyboard = new ReplyKeyboardMarkup
             {
                 Keyboard = new List<List<string>>
@@ -87,29 +65,20 @@ namespace Xakpc.TelegramBot.Client.Tests
                 Selective = true
             };
 
-            var message =
-                await
-                    apiClient.SendMessageAsync(lastMessage.Message.Chat.Id, lastMessage.Message.Text, null, null,
-                        tempKeyboard);
+            var message = await apiClient.SendMessageAsync(TestChatId, messageText, null, null, tempKeyboard);
 
-            Assert.That(message.Text, Is.EqualTo(lastMessage.Message.Text));
+            Assert.That(message.Text, Is.EqualTo(messageText));
         }
 
         [Test]
         public async Task ForwardMessageAsync_Called_SuccesfullyForwarded()
         {
-            ITelegramBotApiClient apiClient = ConstructClient();
-
+            var apiClient = ConstructClient();
             var incoming = await apiClient.GetUpdatesAsync(timeout: 60); // need some mesage to determine chat
-
             Assert.That(incoming, Has.Count.AtLeast(1), "need some incoming mesage to determine chat");
-
             var lastMessage = incoming.Last();
 
-            var message =
-                await
-                    apiClient.ForwardMessageAsync(lastMessage.Message.Chat.Id, lastMessage.Message.Chat.Id,
-                        lastMessage.Message.MessageId);
+            var message = await apiClient.ForwardMessageAsync(lastMessage.Message.Chat.Id, lastMessage.Message.Chat.Id, lastMessage.Message.MessageId);
 
             Assert.That(message.Text, Is.EqualTo(lastMessage.Message.Text));
         }

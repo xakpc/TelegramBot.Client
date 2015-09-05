@@ -23,7 +23,7 @@ namespace Xakpc.TelegramBot.Model
     [DataContract]
     public class Document : MimedMedia
     {       
-        [DataMember(Name = "thumb")]
+        [DataMember(Name = "thumb", IsRequired = false, EmitDefaultValue = true)]
         public PhotoSize Thumb { get; set; }
 
         [DataMember(Name = "file_name", IsRequired = false, EmitDefaultValue = true)]

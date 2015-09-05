@@ -32,6 +32,6 @@ namespace Xakpc.TelegramBot.Model
         public string LastName { get; set; }
 
         [DataMember(Name = "user_id", IsRequired = false, EmitDefaultValue = true)]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

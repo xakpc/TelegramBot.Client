@@ -144,84 +144,107 @@ namespace Xakpc.TelegramBot.Client
         public Task<Message> SendPhotoAsync(int chatId, InputFile photo, string caption, int? replyToMessageId,
             ReplyMarkup replyMarkup)
         {
-            var request = new PhotoRestRequest(chatId, MakeRequest("sendPhoto"))
+            var request = CreatePhotoRestRequest(chatId, caption, replyToMessageId, replyMarkup);
+            request.AddMedia("photo", photo);
+            return ExecutePostRequestAsync<Message>(request);
+        }
+
+        private MediaRestRequest CreatePhotoRestRequest(int chatId, string caption, int? replyToMessageId,
+            ReplyMarkup replyMarkup)
+        {
+            var request = new MediaRestRequest(chatId, MakeRequest("sendPhoto"))
             {
                 Caption = caption,
                 ReplyToMessageId = replyToMessageId,
                 ReplyMarkup = replyMarkup
             };
-
-            request.AddMedia("photo", photo);
-
-            return ExecutePostRequestAsync<Message>(request);
+            return request;
         }
 
         public Task<Message> SendPhotoAsync(int chatId, string photo, string caption, int? replyToMessageId,
             ReplyMarkup replyMarkup)
         {
-            var request = new PhotoRestRequest(chatId, MakeRequest("sendPhoto"))
-            {
-                Caption = caption,
-                ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
-            };
-
+            var request = CreatePhotoRestRequest(chatId, caption, replyToMessageId, replyMarkup);
             request.AddMedia("photo", photo);
-
             return ExecutePostRequestAsync<Message>(request);
         }
 
-        public Task<Message> SendAudioAsync(int chatId, InputFile audio, int? replyToMessageId, ReplyMarkup replyMarkup)
+        public Task<Message> SendAudioAsync(int chatId, InputFile audio, int? duration, string performer, string title, int? replyToMessageId, ReplyMarkup replyMarkup)
         {
-            var request = new MediaRestRequest(chatId, MakeRequest("sendAudio"))
+            var request = CreateAudioRequest(chatId, duration, performer, title, replyToMessageId, replyMarkup);
+            request.AddMedia("audio", audio);
+            return ExecutePostRequestAsync<Message>(request);
+        }      
+
+        public Task<Message> SendAudioAsync(int chatId, string audio, int? duration, string performer, string title, int? replyToMessageId, ReplyMarkup replyMarkup)
+        {
+            var request = CreateAudioRequest(chatId, duration, performer, title, replyToMessageId, replyMarkup);
+            request.AddMedia("audio", audio);
+            return ExecutePostRequestAsync<Message>(request);
+        }
+
+        private AudioRestRequest CreateAudioRequest(int chatId, int? duration, string performer, string title,
+            int? replyToMessageId, ReplyMarkup replyMarkup)
+        {
+            var request = new AudioRestRequest(chatId, MakeRequest("sendAudio"))
             {
                 ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
+                ReplyMarkup = replyMarkup,
+                Duration = duration,
+                Performer = performer,
+                Title = title
             };
-
-            request.AddMedia("audio", audio);
-
-            return ExecutePostRequestAsync<Message>(request);
+            return request;
         }
-
-        public Task<Message> SendAudioAsync(int chatId, string audio, int? replyToMessageId, ReplyMarkup replyMarkup)
+        
+        public Task<Message> SendVoiceAsync(int chatId, InputFile voice, int? duration, int? replyToMessageId, ReplyMarkup replyMarkup)
         {
-            var request = new MediaRestRequest(chatId, MakeRequest("sendAudio"))
-            {
-                ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
-            };
-
-            request.AddMedia("audio", audio);
-
+            var request = CreateSendVoiceRequest(chatId, duration, replyToMessageId, replyMarkup);
+            request.AddMedia("voice", voice);
             return ExecutePostRequestAsync<Message>(request);
         }
 
-        public Task<Message> SendDocumentAsync(int chatId, InputFile document, int? replyToMessageId,
+        public Task<Message> SendVoiceAsync(int chatId, string voice, int? duration, int? replyToMessageId, ReplyMarkup replyMarkup)
+        {
+            var request = CreateSendVoiceRequest(chatId, duration, replyToMessageId, replyMarkup);
+            request.AddMedia("voice", voice);
+            return ExecutePostRequestAsync<Message>(request);
+        }
+
+        private MediaRestRequest CreateSendVoiceRequest(int chatId, int? duration, int? replyToMessageId,
             ReplyMarkup replyMarkup)
+        {
+            var request = new MediaRestRequest(chatId, MakeRequest("sendVoice"))
+            {
+                ReplyToMessageId = replyToMessageId,
+                ReplyMarkup = replyMarkup,
+                Duration = duration
+            };
+            return request;
+        }
+
+        public Task<Message> SendDocumentAsync(int chatId, InputFile document, int? replyToMessageId, ReplyMarkup replyMarkup)
+        {
+            var request = CreateSendDocumentRequest(chatId, replyToMessageId, replyMarkup);
+            request.AddMedia("document", document);
+            return ExecutePostRequestAsync<Message>(request);
+        }
+
+        private MediaRestRequest CreateSendDocumentRequest(int chatId, int? replyToMessageId, ReplyMarkup replyMarkup)
         {
             var request = new MediaRestRequest(chatId, MakeRequest("sendDocument"))
             {
                 ReplyToMessageId = replyToMessageId,
                 ReplyMarkup = replyMarkup
             };
-
-            request.AddMedia("document", document);
-
-            return ExecutePostRequestAsync<Message>(request);
+            return request;
         }
 
         public Task<Message> SendDocumentAsync(int chatId, string document, int? replyToMessageId,
             ReplyMarkup replyMarkup)
         {
-            var request = new MediaRestRequest(chatId, MakeRequest("sendDocument"))
-            {
-                ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
-            };
-
+            var request = CreateSendDocumentRequest(chatId, replyToMessageId, replyMarkup);
             request.AddMedia("document", document);
-
             return ExecutePostRequestAsync<Message>(request);
         }
 
@@ -252,30 +275,31 @@ namespace Xakpc.TelegramBot.Client
             return ExecutePostRequestAsync<Message>(request);
         }
 
-        public Task<Message> SendVideoAsync(int chatId, InputFile video, int? replyToMessageId, ReplyMarkup replyMarkup)
+        public Task<Message> SendVideoAsync(int chatId, InputFile video, int? duration, string caption, int? replyToMessageId, ReplyMarkup replyMarkup)
         {
-            var request = new MediaRestRequest(chatId, MakeRequest("sendVideo"))
-            {
-                ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
-            };
-
+            var request = CreateSendVideoRequest(chatId, duration, caption, replyToMessageId, replyMarkup);
             request.AddMedia("video", video);
-
             return ExecutePostRequestAsync<Message>(request);
         }
 
-        public Task<Message> SendVideoAsync(int chatId, string video, int? replyToMessageId, ReplyMarkup replyMarkup)
+        public Task<Message> SendVideoAsync(int chatId, string video, int? duration, string caption, int? replyToMessageId, ReplyMarkup replyMarkup)
+        {
+            var request = CreateSendVideoRequest(chatId, duration, caption, replyToMessageId, replyMarkup);
+            request.AddMedia("video", video);
+            return ExecutePostRequestAsync<Message>(request);
+        }
+
+        private MediaRestRequest CreateSendVideoRequest(int chatId, int? duration, string caption, int? replyToMessageId,
+            ReplyMarkup replyMarkup)
         {
             var request = new MediaRestRequest(chatId, MakeRequest("sendVideo"))
             {
                 ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
+                ReplyMarkup = replyMarkup,
+                Duration = duration,
+                Caption = caption
             };
-
-            request.AddMedia("video", video);
-
-            return ExecutePostRequestAsync<Message>(request);
+            return request;
         }
 
         public Task<Message> SendLocationAsync(int chatId, float latitude, float longitude, int? replyToMessageId,
@@ -324,7 +348,6 @@ namespace Xakpc.TelegramBot.Client
         #endregion
 
         #region Private Classes
-
         private class MediaRestRequest : RestRequest
         {
             public MediaRestRequest(int chatId, string api) : base(api, Method.POST)
@@ -350,6 +373,24 @@ namespace Xakpc.TelegramBot.Client
                 }
             }
 
+            public int? Duration
+            {
+                set
+                {
+                    if (value != null)
+                        AddQueryParameter("duration", value.Value.ToString());
+                }
+            }
+
+            public string Caption
+            {
+                set
+                {
+                    if (!string.IsNullOrEmpty(value))
+                        AddQueryParameter("caption", value);
+                }
+            }
+
             public void AddMedia(string mediaParameter, InputFile media)
             {
                 AddFile(mediaParameter, media.Data, media.FileName);
@@ -361,22 +402,29 @@ namespace Xakpc.TelegramBot.Client
             }
         }
 
-        private class PhotoRestRequest : MediaRestRequest
+        private class AudioRestRequest : MediaRestRequest
         {
-            public PhotoRestRequest(int chatId, string api) : base(chatId, api)
+            public AudioRestRequest(int chatId, string makeRequest) : base(chatId, makeRequest)
             {
             }
 
-            public string Caption
+            public string Performer
             {
                 set
                 {
                     if (!string.IsNullOrEmpty(value))
-                        AddQueryParameter("caption", value);
+                        AddQueryParameter("title", value);
+                }
+            }
+            public string Title
+            {
+                set
+                {
+                    if (!string.IsNullOrEmpty(value))
+                        AddQueryParameter("title", value);
                 }
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -424,7 +472,8 @@ namespace Xakpc.TelegramBot.Client
         {
             return $"bot{_token}/{method}";
         }
-
         #endregion
     }
+
+
 }

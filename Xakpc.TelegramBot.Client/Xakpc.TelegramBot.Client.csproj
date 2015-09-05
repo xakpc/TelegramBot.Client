@@ -69,6 +69,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserProfilePhotos.cs" />
     <Compile Include="Model\Video.cs" />
+    <Compile Include="Model\Voice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TelegramBotApiClient.cs" />
     <Compile Include="Extensions.cs" />

@@ -22,7 +22,7 @@ namespace Xakpc.TelegramBot.Model
     [DataContract]
     public class Sticker : PhotoSize
     {
-        [DataMember(Name = "thumb")]
+        [DataMember(Name = "thumb", IsRequired = false, EmitDefaultValue = true)]
         public PhotoSize Thumb { get; set; }       
     }
 }

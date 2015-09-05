@@ -25,10 +25,7 @@ namespace Xakpc.TelegramBot.Model
         [DataMember(Name = "duration")]
         public int Duration { get; set; }
 
-        [DataMember(Name = "thumb")]
+        [DataMember(Name = "thumb", IsRequired = false, EmitDefaultValue = true)]
         public PhotoSize Thumb { get; set; }
-
-        [DataMember(Name = "caption", IsRequired = false, EmitDefaultValue = true)]
-        public string Caption { get; set; }
     }
 }
