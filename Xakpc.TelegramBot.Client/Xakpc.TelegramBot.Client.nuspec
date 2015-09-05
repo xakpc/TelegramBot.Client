@@ -8,6 +8,7 @@
     <owners>$author$</owners>
     <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.en.html</licenseUrl>
     <projectUrl>https://github.com/xakpc/TelegramBot.Client</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/xakpc/TelegramBot.Client/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Changes related to August 29, 2015 update</releaseNotes>
