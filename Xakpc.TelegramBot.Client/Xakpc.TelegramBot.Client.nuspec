@@ -2,21 +2,21 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <version>1.0.3</version>
+    <title>Telegram Bot Client Library</title>
+    <authors>Pavel Osadchuk</authors>
     <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.en.html</licenseUrl>
     <projectUrl>https://github.com/xakpc/TelegramBot.Client</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/xakpc/TelegramBot.Client/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>C# client for HTTP-based interface created for developers keen on building bots for Telegram. See https://core.telegram.org/bots fore more information about Telegram bots</description>
+    <summary>C# Telegram Bots Api client library</summary>
     <releaseNotes>Changes related to August 29, 2015 update</releaseNotes>
     <copyright>Copyright(C) 2015 by Pavel Osadchuk</copyright>
     <tags>Telegram Bot Api Client</tags>
     <dependencies>
-      <dependency id="Newtonsoft.Json" />
-      <dependency id="RestSharp" />
+      <dependency id="Newtonsoft.Json" version="7.0.1" />
+      <dependency id="RestSharp" version="105.1.0" />
     </dependencies>
   </metadata>
 
