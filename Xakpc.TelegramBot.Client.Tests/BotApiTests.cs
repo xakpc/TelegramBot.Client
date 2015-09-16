@@ -19,11 +19,11 @@ namespace Xakpc.TelegramBot.Client.Tests
 {
     public class BotApiTests
     {
-        protected int TestChatId => 101292331;
+        protected int TestChatId => TODO;
 
         protected static ITelegramBotApiClient ConstructClient()
         {            
-            return new TelegramBotApiClient("***REMOVED***");
+            return new TelegramBotApiClient("TODO");
         }
     }
 }
