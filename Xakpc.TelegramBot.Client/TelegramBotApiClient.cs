@@ -92,14 +92,16 @@ namespace Xakpc.TelegramBot.Client
             return apiResponse.Result;
         }
 
-        public Task SetWebhookAsync(Uri url)
+        public async Task SetWebhookAsync(Uri url)
         {
             if (url.Scheme != "https")
                 throw new ArgumentException("Url must be HTTPS", nameof(url));
 
             var request = new RestRequest(MakeRequest("setWebhook"), Method.GET);
             request.AddQueryParameter("url", url.AbsoluteUri);
-            return _client.ExecuteGetTaskAsync(request);
+            var rq = await _client.ExecuteGetTaskAsync(request);
+
+            await Task.Delay(1);
         }
 
         public Task SetWebhookAsync(Uri url, InputFile certificate)
@@ -120,12 +122,26 @@ namespace Xakpc.TelegramBot.Client
             var result = await _client.ExecuteGetTaskAsync(request).ConfigureAwait(false);
         }
 
-        public Task<Message> SendMessageAsync(int chatId, string text, bool? disableWebPagePreview,
-            int? replyToMessageId, ReplyMarkup replyMarkup)
+        public Task<Message> SendMessageAsync(int chatId, string text)
+        {
+            return SendMessageAsync(chatId, text, string.Empty);
+        }
+
+        public Task<Message> SendMessageAsync(int chatId, string text, bool? disableWebPagePreview, int? replyToMessageId,
+            ReplyMarkup replyMarkup)
+        {
+            return SendMessageAsync(chatId, text, string.Empty, disableWebPagePreview, replyToMessageId, replyMarkup);
+        }
+
+        public Task<Message> SendMessageAsync(int chatId, string text, string parseMode, bool? disableWebPagePreview = null,
+            int? replyToMessageId = null, ReplyMarkup replyMarkup = null)
         {
             var request = new RestRequest(MakeRequest("sendMessage"), Method.POST);
 
             request.AddQueryIntParameter("chat_id", chatId);
+
+            if (!string.IsNullOrEmpty(parseMode))
+                request.AddQueryParameter("parse_mode", parseMode);
 
             if (disableWebPagePreview.HasValue)
                 request.AddQueryParameter("disable_web_page_preview", disableWebPagePreview.Value.ToString());

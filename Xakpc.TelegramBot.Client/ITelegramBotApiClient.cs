@@ -67,11 +67,31 @@ namespace Xakpc.TelegramBot.Client
         /// </summary>
         /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
         /// <param name="text">Text of the message to be sent</param>
+        /// <returns>On success, the sent Message is returned.</returns>
+        Task<Message> SendMessageAsync(int chatId, string text);
+
+        /// <summary>
+        /// Use this method to send text messages.
+        /// </summary>
+        /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
+        /// <param name="text">Text of the message to be sent</param>
         /// <param name="disableWebPagePreview">Optional. Disables link previews for links in this message</param>
         /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
         /// <param name="replyMarkup">Optional.	Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
         /// <returns>On success, the sent Message is returned.</returns>
         Task<Message> SendMessageAsync(int chatId, string text, bool? disableWebPagePreview, int? replyToMessageId, ReplyMarkup replyMarkup);
+
+        /// <summary>
+        /// Use this method to send text messages.
+        /// </summary>
+        /// <param name="chatId">Unique identifier for the message recipient — User or GroupChat id</param>
+        /// <param name="text">Text of the message to be sent</param>
+        /// <param name="parseMode">Send "Markdown", if you want Telegram apps to show bold, italic and inline URLs in your bot's message. For the moment, only Telegram for Android supports this.</param>
+        /// <param name="disableWebPagePreview">Optional. Disables link previews for links in this message</param>
+        /// <param name="replyToMessageId">Optional. If the message is a reply, ID of the original message</param>
+        /// <param name="replyMarkup">Optional.	Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
+        /// <returns>On success, the sent Message is returned.</returns>
+        Task<Message> SendMessageAsync(int chatId, string text, string parseMode, bool? disableWebPagePreview, int? replyToMessageId, ReplyMarkup replyMarkup);
 
         /// <summary>
         /// Use this method to forward messages of any kind.

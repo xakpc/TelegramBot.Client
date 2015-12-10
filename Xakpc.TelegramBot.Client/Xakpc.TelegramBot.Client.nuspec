@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>Telegram Bot Client Library</title>
     <authors>Pavel Osadchuk</authors>
     <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.en.html</licenseUrl>
@@ -16,7 +16,7 @@
     <tags>Telegram Bot Api Client</tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="7.0.1" />
-      <dependency id="RestSharp" version="105.1.0" />
+      <dependency id="RestSharp" version="105.2.3" />
     </dependencies>
   </metadata>
 
