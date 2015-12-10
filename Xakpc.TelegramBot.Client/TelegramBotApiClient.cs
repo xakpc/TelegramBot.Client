@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Deserializers;
 using Xakpc.TelegramBot.Model;
+using File = Xakpc.TelegramBot.Model.File;
 
 namespace Xakpc.TelegramBot.Client
 {
@@ -90,6 +91,26 @@ namespace Xakpc.TelegramBot.Client
             var apiResponse = deserial.Deserialize<ApiResponse<List<Update>>>(new RestResponse {Content = sb.ToString()});
 
             return apiResponse.Result;
+        }
+
+        public Task<File> GetFileAsync(string fileId)
+        {
+            var request = new RestRequest(MakeRequest("getFile"), Method.GET);
+
+            request.AddQueryParameter("file_id", fileId);
+
+            return ExecuteGetRequestAsync<File>(request);
+        }
+
+        public string GetFileDownloadUri(File file)
+        {
+            return $"https://api.telegram.org/file/bot{_token}/{file.FilePath}";
+        }
+
+        public Task<byte[]> DownloadFileAsync(File file)
+        {
+            var wc = new WebClient();
+            return wc.DownloadDataTaskAsync(GetFileDownloadUri(file));
         }
 
         public async Task SetWebhookAsync(Uri url)

@@ -45,6 +45,31 @@ namespace Xakpc.TelegramBot.Client
         Task<List<Update>> GetUpdatesAsync(int offset = 0, int limit = 100, int timeout = 0);
 
         /// <summary>
+        /// Use this method to get basic info about a file and prepare it for downloading. For the moment, 
+        /// bots can download files of up to 20MB in size. On success, a File object is returned. 
+        /// The file can then be downloaded via the link https://api.telegram.org/file/bot/<token/>//<file_path/>, 
+        /// where /<file_path/> is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. 
+        /// When the link expires, a new one can be requested by calling getFile again.
+        /// </summary>
+        /// <param name="fileId"></param>
+        /// <returns></returns>
+        Task<File> GetFileAsync(string fileId);
+
+        /// <summary>
+        /// Build file download uri to download file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        string GetFileDownloadUri(File file);
+
+        /// <summary>
+        /// Download file as byte array
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        Task<byte[]> DownloadFileAsync(File file);
+
+        /// <summary>
         /// Use this method to specify a url and receive incoming updates via an outgoing webhook
         /// </summary>
         /// <param name="url">Optional. HTTPS url to send updates to.</param>

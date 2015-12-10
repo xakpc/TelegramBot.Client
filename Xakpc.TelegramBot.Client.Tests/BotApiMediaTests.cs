@@ -15,6 +15,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Xakpc.TelegramBot.Client.Tests. If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -106,6 +107,22 @@ namespace Xakpc.TelegramBot.Client.Tests
             var message = await apiClient.SendLocationAsync(TestChatId, -14.407778f, -71.3f, null, null);
 
             Assert.IsNotNull(message.Location);
+        }
+
+        [Test]
+        public async Task SendAndDownloadPhoto_ReturnsSamePhoto()
+        {
+            var apiClient = ConstructClient();
+
+            var message = await apiClient.SendPhotoAsync(TestChatId, new InputFile(ImageToByte(Resources.photo), "photo.png"), null, null, null);
+
+            var file = await apiClient.GetFileAsync(message.Photo.Last().FileId);
+
+            Assert.IsNotNullOrEmpty(file.FilePath);
+
+            var actual = await apiClient.DownloadFileAsync(file);
+
+            Assert.AreEqual(file.FileSize, actual.Length);
         }
 
         private static byte[] ImageToByte(Image img)

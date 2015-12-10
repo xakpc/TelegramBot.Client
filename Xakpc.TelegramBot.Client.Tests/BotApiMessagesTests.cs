@@ -38,6 +38,17 @@ namespace Xakpc.TelegramBot.Client.Tests
         }
 
         [Test]
+        public async Task SendFormattedMessageAsync_Called_SuccesfullySentMessage()
+        {
+            var apiClient = ConstructClient();
+            const string messageText = "SendMessageAsync_Called_SuccesfullySentMessage";
+
+            var message = await apiClient.SendMessageAsync(TestChatId, $"*{messageText}*", "Markdown", null, null, null);
+
+            Assert.That(message.Text, Is.EqualTo(messageText));
+        }
+
+        [Test]
         public async Task SendMessageAsync_WithKeyboardHide_SuccesfullyHideKeyboard()
         {
             var apiClient = ConstructClient();
@@ -82,6 +93,8 @@ namespace Xakpc.TelegramBot.Client.Tests
 
             Assert.That(message.Text, Is.EqualTo(lastMessage.Message.Text));
         }
+
+
 
     }
 }
