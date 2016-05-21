@@ -58,7 +58,7 @@
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\File.cs" />
     <Compile Include="Model\ForceReply.cs" />
-    <Compile Include="Model\GroupChat.cs" />
+    <Compile Include="Model\Chat.cs" />
     <Compile Include="Model\InputFile.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Message.cs" />

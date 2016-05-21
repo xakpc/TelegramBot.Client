@@ -40,10 +40,13 @@ namespace Xakpc.TelegramBot.Model
         public DateTime Date { get; set; }
 
         [DataMember(Name = "chat")]
-        public GroupChat Chat { get; set; }
+        public Chat Chat { get; set; }
 
         [DataMember(Name = "forward_from", IsRequired = false, EmitDefaultValue = true)]
         public User ForwardFrom { get; set; }
+
+        [DataMember(Name = "forward_from_chat", IsRequired = false, EmitDefaultValue = true)]
+        public Chat ForwardFromChat { get; set; }
 
         [DataMember(Name = "forward_date", IsRequired = false, EmitDefaultValue = true)]
         public DateTime? ForwardDate { get; set; }

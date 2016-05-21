@@ -49,6 +49,20 @@ namespace Xakpc.TelegramBot.Client.Tests
         }
 
         [Test]
+        public async Task SendFormattedComplexMessageAsync_Called_SuccesfullySentMessage()
+        {
+            var apiClient = ConstructClient();
+            const string messageText = @"ChatBots Hub
+[Grupo en Telegram](https://telegram.me/joinchat/AdBIOgbEcVYDywy_Ri1KTw) 
+[Canal de Noticias de ChatBots en Telegram](https://telegram.me/chatbotshub)
+[Grupo en Facebook](https://www.facebook.com/groups/chatbotshub)";
+
+            var message = await apiClient.SendMessageAsync(TestChatId, $"{messageText}", "Markdown", null, null, null);
+
+            Assert.That(message.Text, Is.EqualTo(messageText));
+        }
+
+        [Test]
         public async Task SendMessageAsync_WithKeyboardHide_SuccesfullyHideKeyboard()
         {
             var apiClient = ConstructClient();

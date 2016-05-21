@@ -37,6 +37,16 @@ namespace Xakpc.TelegramBot.Client.Tests
         }
 
         [Test]
+        public async Task SendPhotoAsync_CalledWithDescription_SuccesfullySent()
+        {
+            var apiClient = ConstructClient();
+
+            var message = await apiClient.SendPhotoAsync(TestChatId, new InputFile(ImageToByte(Resources.photo), "photo.png"), "description", null, null);
+
+            Assert.IsNotNull(message.Photo);
+        }
+
+        [Test]
         public async Task SendPhotoAsync_CalledWithFileId_SuccesfullyResent()
         {
             // arrange
