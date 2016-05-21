@@ -2,6 +2,12 @@
 C# client library to consume Telegram Bots api https://core.telegram.org/bots/api
 
 ##Usage
+Install via NuGet https://www.nuget.org/packages/Xakpc.TelegramBot.Client/
+
+```
+PM> Install-Package Xakpc.TelegramBot.Client
+```
+
 Most of usage can be peeked in tests. To make tests work set your bot token in `BotApiTests.cs`
 ```C#
 protected static ITelegramBotApiClient ConstructClient()
