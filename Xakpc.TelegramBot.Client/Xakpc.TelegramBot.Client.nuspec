@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.4</version>
+    <version>1.0.4.1</version>
     <title>Telegram Bot Client Library</title>
     <authors>Pavel Osadchuk</authors>
     <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.en.html</licenseUrl>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# client for HTTP-based interface created for developers keen on building bots for Telegram. See https://core.telegram.org/bots fore more information about Telegram bots</description>
     <summary>C# Telegram Bots Api client library</summary>
-    <releaseNotes>Changes related to August 29, 2015 update</releaseNotes>
+    <releaseNotes>Changes related to October 8, 2015 update</releaseNotes>
     <copyright>Copyright(C) 2015 by Pavel Osadchuk</copyright>
     <tags>Telegram Bot Api Client</tags>
     <dependencies>
