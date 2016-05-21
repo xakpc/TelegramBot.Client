@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -359,8 +360,8 @@ namespace Xakpc.TelegramBot.Client
                 ReplyMarkup = replyMarkup
             };
 
-            request.AddMedia("latitude", latitude.ToString("F6"));
-            request.AddMedia("longitude", longitude.ToString("F6"));
+            request.AddMedia("latitude", latitude.ToString("F6", CultureInfo.InvariantCulture));
+            request.AddMedia("longitude", longitude.ToString("F6", CultureInfo.InvariantCulture));
 
             return ExecutePostRequestAsync<Message>(request);
         }
