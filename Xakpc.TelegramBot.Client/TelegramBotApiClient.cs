@@ -486,10 +486,10 @@ namespace Xakpc.TelegramBot.Client
                 throw new Exception("Transport exception: " + result.ResponseStatus, result.ErrorException);
 
             if (result.StatusCode != HttpStatusCode.OK)
-                throw new HttpRequestException("Http error: " + result.StatusCode);
+                throw new HttpRequestException($"Http Error. StatusCode: {result.StatusCode}, Content: {result.Content}");
 
             if (!result.Data.Ok)
-                throw new Exception("API error");
+                throw new Exception($"API error. Content {result.Content}");
 
             return result.Data.Result;
         }
@@ -502,10 +502,10 @@ namespace Xakpc.TelegramBot.Client
                 throw new Exception("Transport exception: " + result.ResponseStatus, result.ErrorException);
 
             if (result.StatusCode != HttpStatusCode.OK)
-                throw new HttpRequestException("Http error: " + result.StatusCode);
+                throw new HttpRequestException($"Http Error. StatusCode: {result.StatusCode}, Content: {result.Content}");
 
             if (!result.Data.Ok)
-                throw new Exception("API error");
+                throw new Exception($"API error. Content {result.Content}");
 
             return result.Data.Result;
         }
