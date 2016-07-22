@@ -108,7 +108,31 @@ namespace Xakpc.TelegramBot.Client.Tests
             Assert.That(message.Text, Is.EqualTo(lastMessage.Message.Text));
         }
 
+        [Test]
+        public async Task SendMessageAsync_WithInlineKeyboardMarkup_SuccessfullySentMessage()
+        {
+            var apiClient = ConstructClient();
+            const string messageText = "SendMessageAsync_WithInlineKeyboardMarkup_SuccessfullySentMessage";
+            var tempKeyboard = new InlineKeyboardMarkup
+            {
+                InlineKeyboard = new List<List<InlineKeyboardButton>>
+                {
+                    new List<InlineKeyboardButton>
+                    {
+                        new InlineKeyboardButton { Text = "A", Url = "https://telegram.org/" },
+                        new InlineKeyboardButton { Text = "B", Url = "https://telegram.org/" }
+                    },
+                    new List<InlineKeyboardButton>
+                    {
+                        new InlineKeyboardButton { Text = "C", CallbackData = "callback1" },
+                        new InlineKeyboardButton { Text = "D", CallbackData = "callback2" }
+                    }
+                }
+            };
 
+            var message = await apiClient.SendMessageAsync(TestChatId, messageText, null, null, tempKeyboard);
 
+            Assert.That(message.Text, Is.EqualTo(messageText));
+        }
     }
 }
