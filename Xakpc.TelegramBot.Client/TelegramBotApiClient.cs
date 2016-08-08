@@ -27,7 +27,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Deserializers;
+using RestSharp.Extensions;
 using Xakpc.TelegramBot.Model;
+using Xakpc.TelegramBot.Model.Base;
 using File = Xakpc.TelegramBot.Model.File;
 
 namespace Xakpc.TelegramBot.Client
@@ -393,6 +395,112 @@ namespace Xakpc.TelegramBot.Client
 
             return ExecuteGetRequestAsync<UserProfilePhotos>(request);
         }
+         
+        #region Edit Message Text
+        public Task<Message> EditMessageTextAsync(int chatId, int messageId, string text, string parseMode = null,
+            bool? disableWebPagePreview = null, InlineKeyboardMarkup replyMarkup = null)
+        {
+            return EditMessageTextAsync(chatId, messageId, null, text, parseMode, disableWebPagePreview, replyMarkup);
+        }
+
+        public Task<Message> EditMessageTextAsync(string inlineMessageId, string text, string parseMode = null,
+            bool? disableWebPagePreview = null, InlineKeyboardMarkup replyMarkup = null)
+        {
+            return EditMessageTextAsync(null, null, inlineMessageId, text, parseMode, disableWebPagePreview, replyMarkup);
+        }
+
+        private Task<Message> EditMessageTextAsync(int? chatId, int? messageId, string inlineMessageId, string text, string parseMode,
+            bool? disableWebPagePreview, InlineKeyboardMarkup replyMarkup)
+        {
+            var request = new RestRequest(MakeRequest("editMessageText"), Method.POST);
+
+            if (chatId.HasValue)
+                request.AddQueryIntParameter("chat_id", chatId.Value);
+
+            if (messageId.HasValue)
+                request.AddQueryIntParameter("message_id", messageId.Value);
+
+            if (!string.IsNullOrEmpty(inlineMessageId))
+                request.AddQueryParameter("inline_message_id", inlineMessageId);
+
+            if (!string.IsNullOrEmpty(parseMode))
+                request.AddQueryParameter("parse_mode", parseMode);
+
+            if (disableWebPagePreview.HasValue)
+                request.AddQueryParameter("disable_web_page_preview", disableWebPagePreview.Value.ToString());
+
+            request.AddParameter("text", text);
+
+            if (replyMarkup != null)
+                request.AddParameter("reply_markup", JsonConvert.SerializeObject(replyMarkup));
+
+            return ExecutePostRequestAsync<Message>(request);
+        }
+        #endregion
+
+        #region Edit Message Caption
+        public Task<Message> EditMessageCaptionAsync(int chatId, int messageId, string caption, InlineKeyboardMarkup replyMarkup = null)
+        {
+            return EditMessageCaptionAsync(chatId, messageId, null, caption, replyMarkup);
+        }
+
+        public Task<Message> EditMessageCaptionAsync(string inlineMessageId, string caption, InlineKeyboardMarkup replyMarkup = null)
+        {
+            return EditMessageCaptionAsync(null, null, inlineMessageId, caption, replyMarkup);
+        }
+
+        private Task<Message> EditMessageCaptionAsync(int? chatId, int? messageId, string inlineMessageId, string caption, InlineKeyboardMarkup replyMarkup)
+        {
+            var request = new RestRequest(MakeRequest("editMessageCaption"), Method.POST);
+
+            if (chatId.HasValue)
+                request.AddQueryIntParameter("chat_id", chatId.Value);
+
+            if (messageId.HasValue)
+                request.AddQueryIntParameter("message_id", messageId.Value);
+
+            if (!string.IsNullOrEmpty(inlineMessageId))
+                request.AddQueryParameter("inline_message_id", inlineMessageId);
+
+            request.AddQueryParameter("caption", caption);
+
+            if (replyMarkup != null)
+                request.AddParameter("reply_markup", JsonConvert.SerializeObject(replyMarkup));
+
+            return ExecutePostRequestAsync<Message>(request);
+        }
+        #endregion
+
+        #region Edit Message Reply Markup
+        public Task<Message> EditMessageReplyMarkupAsync(int chatId, int messageId, InlineKeyboardMarkup replyMarkup = null)
+        {
+            return EditMessageReplyMarkupAsync(chatId, messageId, null, replyMarkup);
+        }
+
+        public Task<Message> EditMessageReplyMarkupAsync(string inlineMessageId, InlineKeyboardMarkup replyMarkup = null)
+        {
+            return EditMessageReplyMarkupAsync(null, null, inlineMessageId, replyMarkup);
+        }
+
+        private Task<Message> EditMessageReplyMarkupAsync(int? chatId, int? messageId, string inlineMessageId, InlineKeyboardMarkup replyMarkup)
+        {
+            var request = new RestRequest(MakeRequest("editMessageReplyMarkup"), Method.POST);
+
+            if (chatId.HasValue)
+                request.AddQueryIntParameter("chat_id", chatId.Value);
+
+            if (messageId.HasValue)
+                request.AddQueryIntParameter("message_id", messageId.Value);
+
+            if (!string.IsNullOrEmpty(inlineMessageId))
+                request.AddQueryParameter("inline_message_id", inlineMessageId);
+
+            if (replyMarkup != null)
+                request.AddParameter("reply_markup", JsonConvert.SerializeObject(replyMarkup));
+
+            return ExecutePostRequestAsync<Message>(request);
+        }
+        #endregion
 
         #endregion
 
@@ -521,8 +629,7 @@ namespace Xakpc.TelegramBot.Client
         {
             return $"bot{_token}/{method}";
         }
+
         #endregion
     }
-
-
 }

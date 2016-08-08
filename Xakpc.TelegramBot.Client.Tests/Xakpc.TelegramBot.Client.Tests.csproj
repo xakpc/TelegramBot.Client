@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotApiEditMessageTests.cs" />
     <Compile Include="BotApiMediaTests.cs" />
     <Compile Include="BotApiMessagesTests.cs" />
     <Compile Include="BotApiTests.cs" />

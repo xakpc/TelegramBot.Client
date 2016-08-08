@@ -16,6 +16,7 @@
 //  along with Xakpc.TelegramBot.Client. If not, see <http://www.gnu.org/licenses/>.
 
 using System.Runtime.Serialization;
+using Xakpc.TelegramBot.Model.Base;
 
 namespace Xakpc.TelegramBot.Model
 {
@@ -33,5 +34,13 @@ namespace Xakpc.TelegramBot.Model
         /// </summary>
         [DataMember(Name = "hide_keyboard")]
         public bool? HideKeyboard { get; set; } = true;
+
+        /// <summary>
+        /// Optional. Use this parameter if you want to force reply from specific users only. Targets: 
+        /// 1) users that are @mentioned in the text of the Message object; 
+        /// 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
+        /// </summary>
+        [DataMember(Name = "selective", IsRequired = false, EmitDefaultValue = false)]
+        public bool? Selective { get; set; }
     }
 }

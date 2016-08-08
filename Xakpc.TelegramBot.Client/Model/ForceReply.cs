@@ -16,6 +16,7 @@
 //  along with Xakpc.TelegramBot.Client. If not, see <http://www.gnu.org/licenses/>.
 
 using System.Runtime.Serialization;
+using Xakpc.TelegramBot.Model.Base;
 
 namespace Xakpc.TelegramBot.Model
 {
@@ -31,11 +32,7 @@ namespace Xakpc.TelegramBot.Model
         /// </summary>
         [DataMember(Name = "force_reply")]
         public bool ForceReplyFlag { get; set; } = true;
-    }
 
-    [DataContract]
-    public abstract class ReplyMarkup
-    {
         /// <summary>
         /// Optional. Use this parameter if you want to force reply from specific users only. Targets: 
         /// 1) users that are @mentioned in the text of the Message object; 
