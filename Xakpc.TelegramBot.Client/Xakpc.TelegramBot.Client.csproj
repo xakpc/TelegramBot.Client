@@ -78,6 +78,7 @@
     <Compile Include="Model\Video.cs" />
     <Compile Include="Model\Voice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelegramApiException.cs" />
     <Compile Include="TelegramBotApiClient.cs" />
     <Compile Include="Extensions.cs" />
   </ItemGroup>

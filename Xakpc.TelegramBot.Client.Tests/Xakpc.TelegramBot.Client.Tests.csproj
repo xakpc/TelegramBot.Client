@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BotApiEditMessageTests.cs" />
+    <Compile Include="BotApiExceptionsTests.cs" />
     <Compile Include="BotApiMediaTests.cs" />
     <Compile Include="BotApiMessagesTests.cs" />
     <Compile Include="BotApiTests.cs" />

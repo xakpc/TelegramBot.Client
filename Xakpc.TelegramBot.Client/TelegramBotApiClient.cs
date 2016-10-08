@@ -25,6 +25,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Deserializers;
 using RestSharp.Extensions;
@@ -592,6 +593,13 @@ namespace Xakpc.TelegramBot.Client
 
             if (result.ResponseStatus != ResponseStatus.Completed)
                 throw new Exception("Transport exception: " + result.ResponseStatus, result.ErrorException);
+
+            if (result.StatusCode == HttpStatusCode.BadRequest)
+            {
+                dynamic error = JObject.Parse(result.Content);
+                throw new TelegramApiException((int)error.error_code, (string)error.description);
+            }
+
 
             if (result.StatusCode != HttpStatusCode.OK)
                 throw new HttpRequestException($"Http Error. StatusCode: {result.StatusCode}, Content: {result.Content}");
