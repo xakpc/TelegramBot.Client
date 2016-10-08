@@ -35,7 +35,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VS2015\Junction.ChatFirst.TelegramService\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -54,11 +54,17 @@
     <Compile Include="Model\Audio.cs" />
     <Compile Include="Model\Base\Media.cs" />
     <Compile Include="Model\Base\MimedMedia.cs" />
+    <Compile Include="Model\Base\ReplyMarkup.cs" />
+    <Compile Include="Model\CallbackQuery.cs" />
+    <Compile Include="Model\ChosenInlineResult.cs" />
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\File.cs" />
     <Compile Include="Model\ForceReply.cs" />
     <Compile Include="Model\Chat.cs" />
+    <Compile Include="Model\InlineKeyboardButton.cs" />
+    <Compile Include="Model\InlineKeyboardMarkup.cs" />
+    <Compile Include="Model\InlineQuery.cs" />
     <Compile Include="Model\InputFile.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Message.cs" />

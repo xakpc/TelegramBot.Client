@@ -38,5 +38,28 @@ namespace Xakpc.TelegramBot.Model
         [DataMember(Name = "message")]
         public Message Message { get; set; }
 
+        /// <summary>
+        /// Optional. New version of a message that is known to the bot and was edited
+        /// </summary>
+        [DataMember(Name = "edited_message")]
+        public Message EditedMessage { get; set; }
+
+        /// <summary>
+        /// Optional. New incoming inline query
+        /// </summary>
+        [DataMember(Name = "inline_query")]
+        public InlineQuery InlineQuery { get; set; }
+
+        /// <summary>
+        /// Optional. The result of an inline query that was chosen by a user and sent to their chat partner.
+        /// </summary>
+        [DataMember(Name = "chosen_inline_result")]
+        public ChosenInlineResult ChosenInlineResult { get; set; }
+
+        /// <summary>
+        /// Optional. New incoming callback query
+        /// </summary>
+        [DataMember(Name = "callback_query")]
+        public CallbackQuery CallbackQuery { get; set; }
     }
 }

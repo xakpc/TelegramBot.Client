@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xakpc.TelegramBot.Model;
+using Xakpc.TelegramBot.Model.Base;
 
 namespace Xakpc.TelegramBot.Client
 {
@@ -305,5 +306,64 @@ namespace Xakpc.TelegramBot.Client
         /// <param name="limit">Optional. Limits the number of photos to be retrieved. Values between 1—100 are accepted. Defaults to 100.</param>
         /// <returns>Returns a UserProfilePhotos object.</returns>
         Task<UserProfilePhotos> GetUserProfilePhotos(int userId, int? offset, int? limit);
+
+        /// <summary>
+        /// Use this method to edit text messages sent by the bot or via the bot (for inline bots)
+        /// </summary>
+        /// <param name="chatId">Unique identifier for the target chat or username of the target channel (in the format @channelusername)</param>
+        /// <param name="messageId">Unique identifier of the sent message. Required if inline_message_id is not specified</param>
+        /// <param name="text">New text of the message</param>
+        /// <param name="parseMode">Send "Markdown", if you want Telegram apps to show bold, italic and inline URLs in your bot's message. For the moment, only Telegram for Android supports this.</param>
+        /// <param name="disableWebPagePreview">Optional. Disables link previews for links in this message</param>
+        /// <param name="replyMarkup">Optional. A JSON-serialized object for an inline keyboard</param>
+        /// <returns>On success, if edited message is sent by the bot, the edited Message is returned</returns>
+        Task<Message> EditMessageTextAsync(int chatId, int messageId, string text, string parseMode = null, bool? disableWebPagePreview = null, InlineKeyboardMarkup replyMarkup = null);
+
+        /// <summary>
+        /// Use this method to edit text messages sent by the bot or via the bot (for inline bots)
+        /// </summary>
+        /// <param name="inlineMessageId">Identifier of the inline message</param>
+        /// <param name="text">New text of the message</param>
+        /// <param name="parseMode">Send "Markdown", if you want Telegram apps to show bold, italic and inline URLs in your bot's message. For the moment, only Telegram for Android supports this.</param>
+        /// <param name="disableWebPagePreview">Optional. Disables link previews for links in this message</param>
+        /// <param name="replyMarkup">Optional. A JSON-serialized object for an inline keyboard</param>
+        /// <returns>On success, if edited message is sent by the bot, the edited Message is returned</returns>
+        Task<Message> EditMessageTextAsync(string inlineMessageId, string text, string parseMode = null, bool? disableWebPagePreview = null, InlineKeyboardMarkup replyMarkup = null);
+
+        /// <summary>
+        /// Use this method to edit captions of messages sent by the bot or via the bot (for inline bots)
+        /// </summary>
+        /// <param name="chatId">Unique identifier for the target chat or username of the target channel (in the format @channelusername)</param>
+        /// <param name="messageId">Unique identifier of the sent message. Required if inline_message_id is not specified</param>
+        /// <param name="caption">New caption of the message</param>
+        /// <param name="replyMarkup">Optional. A JSON-serialized object for an inline keyboard</param>
+        /// <returns>On success, if edited message is sent by the bot, the edited Message is returned</returns>
+        Task<Message> EditMessageCaptionAsync(int chatId, int messageId, string caption, InlineKeyboardMarkup replyMarkup = null);
+
+        /// <summary>
+        /// Use this method to edit captions of messages sent by the bot or via the bot (for inline bots)
+        /// </summary>
+        /// <param name="inlineMessageId">Identifier of the inline message</param>
+        /// <param name="caption">New caption of the message</param>
+        /// <param name="replyMarkup">Optional. A JSON-serialized object for an inline keyboard</param>
+        /// <returns>On success, if edited message is sent by the bot, the edited Message is returned</returns>
+        Task<Message> EditMessageCaptionAsync(string inlineMessageId, string caption, InlineKeyboardMarkup replyMarkup = null);
+
+        /// <summary>
+        /// Use this method to edit only the reply markup of messages sent by the bot or via the bot (for inline bots)
+        /// </summary>
+        /// <param name="chatId">Unique identifier for the target chat or username of the target channel (in the format @channelusername)</param>
+        /// <param name="messageId">Unique identifier of the sent message. Required if inline_message_id is not specified</param>
+        /// <param name="replyMarkup">Optional. A JSON-serialized object for an inline keyboard</param>
+        /// <returns>On success, if edited message is sent by the bot, the edited Message is returned</returns>
+        Task<Message> EditMessageReplyMarkupAsync(int chatId, int messageId, InlineKeyboardMarkup replyMarkup = null);
+
+        /// <summary>
+        /// Use this method to edit only the reply markup of messages sent by the bot or via the bot (for inline bots)
+        /// </summary>
+        /// <param name="inlineMessageId">Identifier of the inline message</param>
+        /// <param name="replyMarkup">Optional. A JSON-serialized object for an inline keyboard</param>
+        /// <returns>On success, if edited message is sent by the bot, the edited Message is returned</returns>
+        Task<Message> EditMessageReplyMarkupAsync(string inlineMessageId, InlineKeyboardMarkup replyMarkup = null);
     }   
 }
