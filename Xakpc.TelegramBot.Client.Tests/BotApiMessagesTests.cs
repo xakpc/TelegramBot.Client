@@ -18,6 +18,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Xakpc.TelegramBot.Model;
 
@@ -33,6 +35,30 @@ namespace Xakpc.TelegramBot.Client.Tests
             const string messageText = "SendMessageAsync_Called_SuccesfullySentMessage";
 
             var message = await apiClient.SendMessageAsync(TestChatId, messageText, null, null, null);
+
+            Assert.That(message.Text, Is.EqualTo(messageText));
+        }
+
+        [Test]
+        public async Task SendMessageAsyncWithBracket_Called_SuccesfullySentMessage()
+        {
+            var apiClient = ConstructClient();
+            const string messageText = "[ru-test] [Hi] [Dog] SendMessageAsyncCalledSuccesfullySentMessage";
+
+            dynamic t =
+                JObject.Parse(
+                    "{\"TalkId\":51432,\"Messages\":[{\"MessageId\":1101243430,\"Text\":\"Выберите проект:\",\"Photo\":null,\"LinkedEntities\":null}]}");
+
+            var list = JsonConvert.DeserializeObject < List<List<string>>>("[[\"docxFiledfsdfsdf\"],[\"docxFileук6куенке\"],[\"[Project guide-DIN] [ru] [Перевод] Ольга Топор\"],[\"sample\"],[\"Приключения крошки енота 5\"],[\"Приключения крошки енота 4\"],[\"20161107-10\"],[\"20161107-9\"],[\"20161107-1\"],[\"Привет_тест\"],[\"Показать еще\"],[\"В меню\"]]");
+
+
+            var reply = new ReplyKeyboardMarkup()
+            {
+                Keyboard = list,
+                OneTimeKeyboard = true                
+            };
+
+            var message = await apiClient.SendMessageAsync(TestChatId, messageText, null, null, reply);
 
             Assert.That(message.Text, Is.EqualTo(messageText));
         }

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -590,6 +591,7 @@ namespace Xakpc.TelegramBot.Client
         private async Task<T> ExecutePostRequestAsync<T>(IRestRequest request)
         {
             var result = await _client.ExecutePostTaskAsync<ApiResponse<T>>(request).ConfigureAwait(false);
+            Trace.TraceInformation($"BotApi Result: {result.StatusCode}:{result.Content}");
 
             if (result.ResponseStatus != ResponseStatus.Completed)
                 throw new Exception("Transport exception: " + result.ResponseStatus, result.ErrorException);
@@ -599,7 +601,6 @@ namespace Xakpc.TelegramBot.Client
                 dynamic error = JObject.Parse(result.Content);
                 throw new TelegramApiException((int)error.error_code, (string)error.description);
             }
-
 
             if (result.StatusCode != HttpStatusCode.OK)
                 throw new HttpRequestException($"Http Error. StatusCode: {result.StatusCode}, Content: {result.Content}");
